@@ -200,7 +200,7 @@ function Index() {
               experiência na área médica.
             </p>
             <p className="mt-5 mb-8 text-lg text-muted-foreground">
-              Hoje atuo em escritório próprio, ajudando os meus pacientes sentirem alívio das dores
+              Hoje atuo em minha clínica própria, ajudando os meus pacientes sentirem alívio das dores
               utilizando a prática da Terapia de Hidratação dos Tecidos Conjuntivos, a THTC.
             </p>
             <Cta big />
