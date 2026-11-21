@@ -1,5 +1,0 @@
-# Cloudflare Pages: `npm run deploy` (ou integração com o Git: build `npm run build`, saída `dist`).
-name = "thtc-drmauro"
-pages_build_output_dir = "./dist"
-compatibility_date = "2026-11-17"
-compatibility_flags = ["nodejs_compat"]

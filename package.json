@@ -12,8 +12,8 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview:cf": "npm run build && wrangler pages dev",
-    "deploy": "npm run build && wrangler pages deploy"
+    "preview:cf": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "overrides": {
     "rolldown": "1.2.1"

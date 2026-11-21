@@ -7,8 +7,12 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  // Build para o Cloudflare Pages (gera .output/public com _worker.js e _routes.json).
-  nitro: { preset: "cloudflare-pages" },
+  // Build para o Cloudflare (Worker + assets estáticos), compatível com `wrangler deploy`
+  // do painel (Workers Builds). O build gera .wrangler/deploy/config.json apontando para o Worker.
+  nitro: {
+    preset: "cloudflare-module",
+    cloudflare: { nodeCompat: true, deployConfig: true, wrangler: { name: "thtc-drmauro" } },
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
