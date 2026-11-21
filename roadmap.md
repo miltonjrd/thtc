@@ -1,0 +1,12 @@
+- [ ] Inserir vídeos de depoimentos (aguardando arquivos do Dr. Mauro)
+- [x] Colocar a imagem enviada no início com a frase exata em áudio de 3 segundos e controle de ligar/desligar.
+- [x] Corrigir a sigla para THTC na imagem e no áudio e reduzir o tamanho do quadro inicial.
+- [x] Adicionar a frase sobre mais de 500 pacientes abaixo do título e acima do vídeo, com a sigla THTC.
+- [x] Revisar o criativo vertical com abertura ilustrada e texto solicitado, preservar a apresentação do Dr. Mauro e acrescentar fechamento com THTC e CRM.
+- [x] Retirar as frases repetidas do fechamento do criativo, mantendo a apresentação e a identificação do Dr. Mauro Pedrin – CRM 22699.
+- [x] Trocar a imagem final do criativo pelo Dr. Mauro sorrindo.
+- [x] Melhorar o ritmo e o som da gravação existente, mantendo a foto final aprovada, a voz real, as legendas e o olhar original (v7: quatro pausas reduzidas em 1,47 s; vídeo completo decodificado e sincronia conferida).
+- [x] Disparar evento Contact no pixel THTC a cada clique em botão de WhatsApp, só após aceitar os cookies; publicado no site no ar.
+- [x] Corrigir PageViews automáticos e por âncoras/UTM, preservar Pixel, OpenBridge, consentimento e Contact; testes automatizados e de navegador aprovados; correção ainda não publicada.
+- [x] Evitar encaminhamento OpenBridge apenas no site THTC, preservando o Gateway global, Pixel, PageView manual, Contact e consentimento; 15 testes aprovados e navegador confirmou um PageView por carregamento, nenhum extra por âncora/UTM e zero envios ao Gateway; pronto para solicitar publicação.
+- [x] Trocar a imagem da mulher alongando o braço no topo pelo vídeo do criativo (720x1280, mudo, com botão de som), mantendo o selo "+500 pacientes atendidos".
