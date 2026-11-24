@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
 
 const KEY = "cookie-consent-marketing";
-// ID do Pixel da Meta: defina VITE_META_PIXEL_ID no .env. Sem ele, nenhum evento é enviado.
-const getPixelId = () => (import.meta.env["VITE_META_PIXEL_ID"] as string | undefined)?.trim() || "";
+// ID do Pixel da Meta (público, hardcoded).
+const PIXEL_ID_VALUE = "1120248174191120";
+const getPixelId = () => PIXEL_ID_VALUE;
 
 function startPixel(PIXEL_ID: string) {
   const w = window as any;

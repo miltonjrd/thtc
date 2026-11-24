@@ -11,7 +11,7 @@ const router = vi.hoisted(() => ({
 }));
 vi.mock("@tanstack/react-router", () => ({ useRouter: () => router }));
 
-const ID = "1234567890";
+const ID = "1120248174191120";
 type PixelMock = ReturnType<typeof vi.fn> & { disablePushState?: boolean };
 type PixelWindow = Window & {
   fbq?: PixelMock;
@@ -37,7 +37,6 @@ async function accept() {
 
 describe("Consent-gated Meta page views", () => {
   beforeEach(() => {
-    vi.stubEnv("VITE_META_PIXEL_ID", ID);
     localStorage.clear();
     window.history.replaceState({}, "", "/");
     routes.listeners.clear();
