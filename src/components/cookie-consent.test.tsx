@@ -140,7 +140,7 @@ describe("Tracking without consent", () => {
     (window as unknown as { fbq: unknown }).fbq = pixel;
     render(<CookieConsent />);
     await waitFor(() => expect(pixel).toHaveBeenCalledWith("init", ID, {}, { agent: "lovable" }));
-    expect(document.querySelector('script[src*="googletagmanager.com/gtm.js?id=GTM-MRXXWRDH"]')).not.toBeNull();
+    expect(document.querySelector('script[src*="googletagmanager.com/gtm.js?id=GTM-PWKBPRRF"]')).not.toBeNull();
     expect(screen.queryByRole("button", { name: "Aceitar" })).toBeNull();
     delete (window as unknown as { fbq?: unknown }).fbq;
   });

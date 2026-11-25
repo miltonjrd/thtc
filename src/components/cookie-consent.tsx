@@ -5,7 +5,7 @@ import { useRouter } from "@tanstack/react-router";
 const PIXEL_ID_VALUE = "1120248174191120";
 const getPixelId = () => PIXEL_ID_VALUE;
 // Container do Google Tag Manager (GA4 é configurado dentro do GTM).
-const GTM_ID = "GTM-MRXXWRDH";
+const GTM_ID = "GTM-PWKBPRRF";
 
 function startGtm() {
   const w = window as any;
