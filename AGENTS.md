@@ -11,4 +11,4 @@
 
 - Keep short, pre-generated narration as CDN assets in a dedicated React audio player; playback must not trigger paid generation.
 - Require user interaction to start narration and stop audio when its player unmounts, so visits stay silent and playback cannot leak across pages.
-- Keep consent-gated Meta PageView ownership in CookieConsent: disable SDK automatic navigation, use trackSingle-only dispatch, and deduplicate by pathname so hash/query changes cannot create page views; queue the Pixel-scoped skipOpenbridge command before init to keep this site's events browser-only without changing the shared Gateway or other sites.
+- Keep Meta PageView ownership in CookieConsent: disable SDK automatic navigation, use trackSingle-only dispatch, and deduplicate by pathname so hash/query changes cannot create page views; queue the Pixel-scoped skipOpenbridge command before init to keep this site's events browser-only without changing the shared Gateway or other sites.

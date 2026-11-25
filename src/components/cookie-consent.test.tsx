@@ -31,11 +31,10 @@ function pageViews() {
     command === "trackSingle" && id === ID && event === "PageView");
 }
 async function accept() {
-  fireEvent.click(await screen.findByRole("button", { name: "Aceitar" }));
   await waitFor(() => expect(pageViews()).toHaveLength(1));
 }
 
-describe("Consent-gated Meta page views", () => {
+describe("Meta page views (no consent gate)", () => {
   beforeEach(() => {
     localStorage.clear();
     window.history.replaceState({}, "", "/");
@@ -55,17 +54,6 @@ describe("Consent-gated Meta page views", () => {
     delete pixelWindow.__metaPixelLastPagePath;
     document.querySelectorAll('script[src*="fbevents.js"]').forEach((script) => script.remove());
     vi.restoreAllMocks();
-  });
-
-  it("never initializes or sends events before acceptance or after refusal", async () => {
-    render(<CookieConsent />);
-    await screen.findByRole("button", { name: "Recusar" });
-    expect(pixel).not.toHaveBeenCalled();
-    fireEvent.click(screen.getByRole("button", { name: "Recusar" }));
-    navigate("/outra-pagina");
-    expect(pageViews()).toHaveLength(0);
-    expect(pixel.mock.calls.filter(([command]) => command === "init")).toHaveLength(0);
-    expect(localStorage.getItem("cookie-consent-marketing")).toBe("denied");
   });
 
   it("initializes the unchanged Pixel once with browser-only manual dispatch", async () => {
@@ -105,7 +93,6 @@ describe("Consent-gated Meta page views", () => {
       return append(node);
     });
     render(<CookieConsent />);
-    fireEvent.click(await screen.findByRole("button", { name: "Aceitar" }));
     await waitFor(() => expect(observed).toEqual([true]));
     expect(document.querySelectorAll('script[src*="fbevents.js"]')).toHaveLength(1);
   });
@@ -137,37 +124,6 @@ describe("Consent-gated Meta page views", () => {
     expect(pageViews()).toHaveLength(3);
   });
 
-  it("does not recount a page on component remount or reacceptance", async () => {
-    const view = render(<CookieConsent />);
-    await accept();
-    view.unmount();
-    render(<CookieConsent />);
-    await screen.findByRole("button", { name: "Preferências de cookies" });
-    fireEvent.click(screen.getByRole("button", { name: "Preferências de cookies" }));
-    fireEvent.click(await screen.findByRole("button", { name: "Aceitar" }));
-    expect(pageViews()).toHaveLength(1);
-    expect(pixel.mock.calls.filter(([command]) => command === "init")).toHaveLength(1);
-    expect(pixel.mock.calls.filter(([command]) => command === "skipOpenbridge")).toEqual([["skipOpenbridge", ID]]);
-  });
-
-  it("preserves Contact, revokes consent and stops page/contact dispatch after withdrawal", async () => {
-    render(<><CookieConsent /><a href="https://wa.me/5517996664636" onClick={(event) => event.preventDefault()}>Contato teste</a></>);
-    await accept();
-    fireEvent.click(screen.getByText("Contato teste"));
-    expect(pixel).toHaveBeenCalledWith("trackSingle", ID, "Contact");
-    document.cookie = "_fbp=test; path=/";
-    document.cookie = "_fbc=test; path=/";
-    fireEvent.click(screen.getByRole("button", { name: "Preferências de cookies" }));
-    fireEvent.click(await screen.findByRole("button", { name: "Recusar" }));
-    await waitFor(() => expect(pixel).toHaveBeenCalledWith("consent", "revoke"));
-    const calls = pixel.mock.calls.length;
-    navigate("/outra-pagina");
-    fireEvent.click(screen.getByText("Contato teste"));
-    expect(pixel.mock.calls).toHaveLength(calls);
-    expect(document.cookie).not.toContain("_fbp=");
-    expect(document.cookie).not.toContain("_fbc=");
-  });
-
   it("counts a back/forward cache restoration once but not an ordinary pageshow", async () => {
     render(<CookieConsent />);
     await accept();
@@ -175,5 +131,17 @@ describe("Consent-gated Meta page views", () => {
     expect(pageViews()).toHaveLength(1);
     window.dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
     expect(pageViews()).toHaveLength(2);
+  });
+});
+describe("Tracking without consent", () => {
+  it("loads Meta Pixel and GTM immediately and renders no banner", async () => {
+    localStorage.clear();
+    const pixel = vi.fn();
+    (window as unknown as { fbq: unknown }).fbq = pixel;
+    render(<CookieConsent />);
+    await waitFor(() => expect(pixel).toHaveBeenCalledWith("init", ID, {}, { agent: "lovable" }));
+    expect(document.querySelector('script[src*="googletagmanager.com/gtm.js?id=GTM-MRXXWRDH"]')).not.toBeNull();
+    expect(screen.queryByRole("button", { name: "Aceitar" })).toBeNull();
+    delete (window as unknown as { fbq?: unknown }).fbq;
   });
 });
