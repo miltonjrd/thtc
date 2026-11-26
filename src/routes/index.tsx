@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useScrollFade } from "@/hooks/use-scroll-fade";
 import fascia from "@/assets/fascia.webp";
 import logo from "@/assets/logo.webp";
 import fundoHero from "@/assets/fundo-hero.webp";
@@ -76,7 +75,7 @@ function Section({
   className?: string;
 }) {
   return (
-    <section id={id} data-fade className={`px-5 py-14 md:py-28 ${className}`}>
+    <section id={id} className={`px-5 py-14 md:py-28 ${className}`}>
       <div className="mx-auto max-w-[1280px]">{children}</div>
     </section>
   );
@@ -115,7 +114,6 @@ const FAQ = [
 ];
 
 function Index() {
-  useScrollFade();
   return (
     <main className="overflow-x-hidden bg-background text-foreground">
       {/* 1. Topo (promessa) */}
