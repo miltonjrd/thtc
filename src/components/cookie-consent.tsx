@@ -48,7 +48,7 @@ function startPixel(PIXEL_ID: string) {
   w.fbq("skipOpenbridge", PIXEL_ID);
   w.fbq("init", PIXEL_ID, {}, { agent: "lovable" });
   // Also suppress SDK-generated PageViews on back/forward cache restores.
-  // Explicit trackSingle PageView/Contact remain enabled.
+  // Explicit trackSingle PageView/Lead remain enabled.
   w.fbq("set", "trackSingleOnly", true, PIXEL_ID);
 }
 
@@ -80,7 +80,7 @@ export function CookieConsent() {
       if (!a) return;
       const href = a.getAttribute("href") || "";
       if (!/(wa\.me|whatsapp\.com)/i.test(href)) return;
-      (window as any).fbq?.("trackSingle", PIXEL_ID, "Contact");
+      (window as any).fbq?.("trackSingle", PIXEL_ID, "Lead");
     };
     document.addEventListener("click", onWhatsAppClick, true);
     return () => {
